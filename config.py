@@ -6,11 +6,11 @@ database = 'database.txt' # local text database file that ensures no duplicate v
 
 # Using this config file alone should be able to get you going without further modification.
 reddit_login = {
-	'client_id': '',
-	'client_secret': '',
-	'password': '',
-	'user_agent': '',
-	'username': ''
+	'client_id': 'YnYwz0znuWaZz15D3YS-0Q',
+	'client_secret': '__kNNUSuPyQeWn54NSsTmNwX_0GAxw',
+	'user_agent': 'Rahu',
+	'username': 'The-Meme-Thief6969',
+    'password': 'F0otball'
 }
 
 

@@ -24,21 +24,23 @@ def main():
     vid_list = reddit_scraper.scrape_reddit(config.subreddit)
 
     # Download the first video that is less than 180s and not in the database
-    for vid in vid_list:
+    vid = None
+    for video in vid_list:
         reddit = Downloader(max_q=True)
-        reddit.url = vid["url"]
-        if (reddit.duration < 180) and (vid["url"] not in database):
+        reddit.url = video["url"]
+        if (reddit.duration < 180) and (video["url"] not in database):
+            vid = video
             break
         else:
             vid = None
 
-    # Check if a suitable video was found
+        # Check if a suitable video was found
     if not vid:
         print("No videos less than 180s found!")
         return False
 
     print("Video chosen:", vid)
-    
+
     # Update the database with the video's URL
     # If upload fails or succeed, video will not be picked again.
     with open(config.database, "a") as f:
@@ -48,7 +50,7 @@ def main():
 
     shutil.copy(glob.glob(os.path.join('temp_clips', '*.mp4'))[0], os.path.join('temp_clips', 'main_clip.mp4'))
     render.render("temp_clips", "main_clip.mp4", "output.mp4", config.video["dimensions"])
-
+    exit()
     # Upload the video to YouTube
     config.youtube["title"] = vid["title"] + " #shorts"
     config.youtube["description"] = "Video by: " + vid["author"]
